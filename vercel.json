@@ -1,7 +1,10 @@
 {
 	"functions": {
-		"pages/api": {
+		"api/users/**/*.js": {
+			{
 			"runtime": "now-python@3.8.10"
+			 "maxDuration": 30
+			}
 		}
 	},
 	"routes": [
