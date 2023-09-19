@@ -1,7 +1,6 @@
 {
 	"functions": {
 		"api": {
-			"handler": "app.BMI_Calculator",
 			"runtime": "python3.8"
 		}
 	},
