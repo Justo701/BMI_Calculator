@@ -1,6 +1,6 @@
 {
 	"functions": {
-		"api": {
+		"pages/api": {
 			"runtime": "now-python@3.8.10"
 		}
 	},
