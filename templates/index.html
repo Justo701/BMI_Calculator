@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>BMI Calculator</title>
 </head>
 <body>
@@ -11,16 +9,18 @@
         <h1>BMI Calculator</h1>
         <div class="input-container">
             <label for="weight">Weight (kg):</label>
-            <input type="number" id="weight" placeholder="Enter your weight">
+            <input type="number" id="weight" step="0.01">
         </div>
         <div class="input-container">
             <label for="height">Height (cm):</label>
-            <input type="number" id="height" placeholder="Enter your height">
+            <input type="number" id="height" step="0.01">
         </div>
-        <button id="calculate-btn">Calculate BMI</button>
-        <div id="result"></div>
+        <button id="calculate">Calculate BMI</button>
+        <div class="result-container">
+            <p>Your BMI: <span id="bmi"></span></p>
+            <p>Category: <span id="category"></span></p>
+        </div>
     </div>
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
-
