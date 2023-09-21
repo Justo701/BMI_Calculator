@@ -1,26 +1,32 @@
-document.getElementById("calculate-btn").addEventListener("click", function() {
-    const weight = parseFloat(document.getElementById("weight").value);
-    const height = parseFloat(document.getElementById("height").value) / 100; // Convert cm to meters
+document.addEventListener("DOMContentLoaded", function () {
+    const calculateButton = document.getElementById("calculate");
+    const weightInput = document.getElementById("weight");                const heightInput = document.getElementById("height");
+    const bmiSpan = document.getElementById("bmi");                       const categorySpan = document.getElementById("category");
 
-    if (isNaN(weight) || isNaN(height)) {
-        document.getElementById("result").innerHTML = "Please enter valid values for weight and height.";
-    } else {
-        const bmi = calculateBMI(weight, height);
-        const category = getBMICategory(bmi);
+    calculateButton.addEventListener("click", function () {
+        const weight = parseFloat(weightInput.value);
+        const height = parseFloat(heightInput.value);
 
-        const resultMessage = `Your BMI is ${bmi.toFixed(2)}. You are categorized as ${category}.`;
-        document.getElementById("result").innerHTML = resultMessage;
-    }
+        if (isNaN(weight) || isNaN(height)) {
+            alert("Please enter valid weight and height.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("weight", weight);
+        formData.append("height", height);
+
+        fetch("/calculate", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            bmiSpan.textContent = data.bmi.toFixed(2);
+            categorySpan.textContent = data.category;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    });
 });
-
-function calculateBMI(weight, height) {
-    return weight / (height * height);
-}
-
-function getBMICategory(bmi) {
-    if (bmi < 18.5) return "Underweight";
-    if (bmi < 24.9) return "Normal weight";
-    if (bmi < 29.9) return "Overweight";
-    return "Obese";
-}
-
